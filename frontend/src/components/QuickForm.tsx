@@ -47,7 +47,7 @@ const QuickForm = defineComponent({
               { !emailIsValid.value ? '请填写邮箱' : '发送验证码' }
             </button>
           )}
-          <button class="m-a mt-3 h-5 flex items-center justify-center rounded-xl p-3" onClick={onClick}>关闭</button>
+          <button class="during-300 m-a mt-3 h-5 flex items-center justify-center rounded-xl p-3 transition-all hover:bg-gray" onClick={onClick}>关闭</button>
         </FomContainer>
       </div>
     )

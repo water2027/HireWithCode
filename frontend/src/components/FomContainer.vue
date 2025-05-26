@@ -25,7 +25,7 @@ defineEmits(['submitForm'])
 
 <template>
   <form
-    class="w-9/10 sm:w-1/2 sm:p-24"
+    class="rounded-2rem"
     @submit.prevent="$emit('submitForm')"
   >
     <FormInput
@@ -47,3 +47,20 @@ defineEmits(['submitForm'])
     <slot />
   </form>
 </template>
+
+<style scoped lang="scss">
+@import '@/assets/mixin.scss';
+
+form {
+  @include ResponseTo('phone') {
+    width: 80%;
+    padding: 2rem;
+  }
+
+  @include ResponseTo('desktop') {
+    width: 50%;
+    padding: 4rem;
+    padding-top: 8rem;
+  }
+}
+</style>

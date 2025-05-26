@@ -132,7 +132,7 @@ async function submitWorkForm() {
 <template>
   <div class="root mx-a mt-1 max-h-full flex flex-col overflow-auto">
     <MarkdownContainer class="p-2 shadow-md" :content="desc" />
-    <div class="mt-3 flex">
+    <div class="mb-10 mt-3 flex">
       <WaterButton @click="acceptChallengeForm">
         接受挑战
       </WaterButton>
