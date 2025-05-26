@@ -32,32 +32,6 @@ const challengeForm = reactive<CustomFormData[]>([
     value: '',
   },
 ])
-const submitForm = reactive<CustomFormData[]>([
-  {
-    id: 'email',
-    type: 'email',
-    value: '',
-    label: 'email',
-  },
-  {
-    id: 'code',
-    type: 'text',
-    label: '验证码',
-    value: '',
-  },
-  {
-    id: 'repo url',
-    type: 'text',
-    value: '',
-    label: 'repo url',
-  },
-  {
-    id: '在线体验地址',
-    type: 'text',
-    value: '',
-    label: '在线体验地址',
-  },
-])
 async function acceptChallengeForm() {
   useQuickForm('来吧!', challengeForm, async () => {
     const githubId = challengeForm[0].value
@@ -91,6 +65,33 @@ async function acceptChallengeForm() {
     })
   })
 }
+const submitForm = reactive<CustomFormData[]>([
+  {
+    id: 'email',
+    type: 'email',
+    value: '',
+    label: 'email',
+    reg: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-z\-0-9]+\.)+[a-z]{2,}))$/i,
+  },
+  {
+    id: 'code',
+    type: 'text',
+    label: '验证码',
+    value: '',
+  },
+  {
+    id: 'repo url',
+    type: 'text',
+    value: '',
+    label: 'repo url',
+  },
+  {
+    id: '在线体验地址',
+    type: 'text',
+    value: '',
+    label: '在线体验地址',
+  },
+])
 async function submitWorkForm() {
   useQuickForm('提交!', submitForm, async () => {
     const email = submitForm[0].value
@@ -117,7 +118,7 @@ async function submitWorkForm() {
       showMsg(error as string)
     }
   }, () => {
-    const email = challengeForm[1].value
+    const email = submitForm[0].value
     sendCode({ email }).then(() => {
       showMsg('验证码已发送，请注意查收')
     }).catch((error) => {
