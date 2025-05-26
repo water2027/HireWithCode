@@ -8,9 +8,10 @@ interface Response<T> {
 
 class Request {
   private baseUrl: string
-  constructor(url:string) {
+  constructor(url: string) {
     this.baseUrl = url || 'http://localhost:8080'
   }
+
   private async baseRequest<T>(url: string, init: RequestInit): Promise<T> {
     const resp = await fetch(`${this.baseUrl}${url}`, init)
 
@@ -43,16 +44,18 @@ class Request {
 
     let finalBody
     try {
-        finalBody = body ? JSON.stringify(body) : undefined
-    } catch (error) {
-        finalBody = undefined
+      finalBody = body ? JSON.stringify(body) : undefined
+    }
+    catch (error) {
+      console.error('Error stringify body:', error)
+      finalBody = undefined
     }
     return this.baseRequest<T>(fullUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type':'application/json'
-        },
-        body: finalBody
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: finalBody,
     })
   }
 }

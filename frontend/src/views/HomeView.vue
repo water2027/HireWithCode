@@ -1,12 +1,48 @@
 <script lang="ts" setup>
-import { defineAsyncComponent } from 'vue'
+import type { CustomFormData } from '@/composables/FormExam'
+import { defineAsyncComponent, reactive } from 'vue'
 import desc from '@/assets/desc.md?raw'
+import { useQuickForm } from '@/components/QuickForm'
 import WaterButton from '@/components/WaterButton.vue'
 
 const MarkdownContainer = defineAsyncComponent(() => import('@/components/MarkdownContainer.vue'))
 
-async function acceptChallenge() {}
-async function submitWork() {}
+const challengeForm = reactive<CustomFormData[]>([
+  {
+    id: 'Github ID',
+    type: 'text',
+    label: 'GitHub ID',
+    value: '',
+  },
+  {
+    id: 'Email',
+    type: 'email',
+    label: 'email',
+    value: '',
+    reg: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-z\-0-9]+\.)+[a-z]{2,}))$/i,
+  },
+])
+const submitForm = reactive<CustomFormData[]>([
+  {
+    id: 'repo url',
+    type: 'text',
+    value: '',
+    label: 'repo url',
+  },
+  {
+    id: '在线体验地址',
+    type: 'text',
+    value: '',
+    label: '在线体验地址',
+  },
+])
+async function acceptChallenge() {
+  useQuickForm('来吧!', challengeForm, () => {
+  })
+}
+async function submitWork() {
+  useQuickForm('提交!', submitForm, () => {})
+}
 </script>
 
 <template>
