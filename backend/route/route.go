@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterRoutes(router *gin.Engine) {
+func RegisterRoutes(router *gin.RouterGroup) {
 	workController := controller.NewWorkController(&service.WorkService{})
 	router.POST("/work/submit", workController.SubmitWork)
 	router.POST("/work/view", workController.ViewWork)

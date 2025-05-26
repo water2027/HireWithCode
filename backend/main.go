@@ -11,9 +11,10 @@ import (
 
 func main() {
 	r := gin.Default()
-
+	
 	middleware.RegisterMiddleware(r)
-	route.RegisterRoutes(r)
+	api := r.Group("/api")
+	route.RegisterRoutes(api)
 
 	if err := r.Run(":8080"); err != nil {
 		panic(err)
