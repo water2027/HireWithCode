@@ -1,7 +1,3 @@
-// const baseUrl = import.meta.env.VITE_API_URL
-
-import { showMsg } from "@/components/MessageBox"
-
 interface Response<T> {
   code: number
   message: string
@@ -31,7 +27,7 @@ class Request {
   }
 
   public async get<T>(url: string, query?: Record<string, string>) {
-    const params = new URLSearchParams(query||{})
+    const params = new URLSearchParams(query || {})
     const queryString = params.toString()
     const fullUrl = queryString ? `${url}?${queryString}` : url
     return this.baseRequest<T>(fullUrl, {
