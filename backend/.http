@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:8080
+@baseUrl = http://localhost:8080/api
 ### 发送验证码
 POST {{baseUrl}}/work/send_code HTTP/1.1
 Content-Type: application/json
@@ -14,7 +14,7 @@ Content-Type: application/json
 {
     "email": "3407602045@qq.com",
     "github_id": "water2027",
-    "code": "522149"
+    "code": "463518"
 }
 
 ### 提交作品
@@ -25,7 +25,7 @@ Content-Type: application/json
     "email": "3407602045@qq.com",
     "github_url": "https://github.com/water2027/work",
     "online_url": "https://water2027.github.io/111work",
-    "code": "233209"
+    "code": "669707"
 }
 
 ### 查看

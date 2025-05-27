@@ -22,12 +22,11 @@ func NewWorkController(workService *service.WorkService) *WorkController {
 }
 
 // 接受挑战
-// 题目要求里没说要用邮箱, 但是不用邮箱怎么知道哪个是哪个的? 这里还是用一下吧
 func (wc *WorkController) AcceptChallenge(c *gin.Context) {
 	req := work.AcceptChallengeRequest{}
 	err := dto.BindData(c, &req)
 	if err != nil {
-		dto.ErrorResponse(c, dto.WithCode(dto.AttrError))
+		dto.ErrorResponse(c, dto.WithCode(dto.AttrError), dto.WithMessage(err.Error()))
 		return
 	}
 
@@ -45,7 +44,7 @@ func (wc *WorkController) SubmitWork(c *gin.Context) {
 	req := work.SubmitWorkRequest{}
 	err := dto.BindData(c, &req)
 	if err != nil {
-		dto.ErrorResponse(c, dto.WithCode(dto.AttrError))
+		dto.ErrorResponse(c, dto.WithCode(dto.AttrError), dto.WithMessage(err.Error()))
 		return
 	}
 
@@ -81,7 +80,7 @@ func (wc *WorkController) SendEmail(c *gin.Context) {
 	req := smtp.SendCodeRequest{}
 	err := dto.BindData(c, &req)
 	if err != nil {
-		dto.ErrorResponse(c, dto.WithCode(dto.AttrError))
+		dto.ErrorResponse(c, dto.WithCode(dto.AttrError), dto.WithMessage(err.Error()))
 		return
 	}
 

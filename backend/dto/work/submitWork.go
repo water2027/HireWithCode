@@ -2,6 +2,7 @@ package work
 
 import (
 	"fmt"
+	"github.com/dlclark/regexp2"
 	"strings"
 )
 
@@ -13,11 +14,18 @@ type SubmitWorkRequest struct {
 }
 
 func (swr *SubmitWorkRequest) Examine() error {
-	if strings.TrimSpace(swr.GithubUrl) == "" {
-		return fmt.Errorf("github地址为空")
+	emailReg := regexp2.MustCompile(`^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$`, 0)
+	isMatch, _ := emailReg.MatchString(swr.Email)
+	if !isMatch {
+		return fmt.Errorf("无效的邮箱")
 	}
-	if strings.TrimSpace(swr.OnlineUrl) == "" {
-		return fmt.Errorf("在线体验地址为空")
+
+	if !strings.HasPrefix(swr.GithubUrl, "http://") && !strings.HasPrefix(swr.GithubUrl, "https://") {
+		return fmt.Errorf("无效的仓库链接") 
 	}
+	if !strings.HasPrefix(swr.OnlineUrl, "http://") && !strings.HasPrefix(swr.OnlineUrl, "https://") {
+		return fmt.Errorf("无效的在线体验链接") 
+	}
+
 	return nil
 }
