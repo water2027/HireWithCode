@@ -62,9 +62,10 @@ export function useQuickForm(formName: string, formData: CustomFormData[], onSub
     formName,
     formData,
     onSubmit: async (...args: any[]) => {
-      await onSubmit(...args)
-      app.unmount()
-      document.body.removeChild(div)
+      onSubmit(...args).then(() => {
+        app.unmount()
+        document.body.removeChild(div)
+      })
     },
     onClick: () => {
       app.unmount()

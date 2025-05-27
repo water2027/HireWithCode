@@ -50,10 +50,12 @@ async function acceptChallengeForm() {
         code,
       })
       resp && showMsg(resp)
+      return Promise.resolve()
     }
     catch (error) {
       console.error(error)
       showMsg(error as string)
+      return Promise.reject(error)
     }
   }, () => {
     const email = challengeForm[1].value
@@ -112,10 +114,12 @@ async function submitWorkForm() {
         online_url: onlineUrl,
       })
       resp && showMsg(resp)
+      return Promise.resolve()
     }
     catch (error) {
       console.error(error)
       showMsg(error as string)
+      return Promise.reject(error)
     }
   }, () => {
     const email = submitForm[0].value
